@@ -29,14 +29,7 @@ export default function PostScreen({ navigation }) {
 
   const handleSubmit = () => {
     // alerte si tous les champs ne sont  pas remplis //
-    if (
-      !title ||
-      !category ||
-      !selectedDate ||
-      !place ||
-      !description ||
-      !seats
-    ) {
+    if ( !title || !category || !selectedDate || !place || !description || !seats ) {
       alert("Veuillez remplir tous les champs");
       return;
     }
@@ -44,15 +37,7 @@ export default function PostScreen({ navigation }) {
     fetch(`${BACKEND_URL}/events`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        token: user.token,
-        title: title,
-        category: category,
-        selectedDate: new Date(formatedDate),
-        address: place,
-        description: description,
-        seats: seats,
-      }),
+      body: JSON.stringify({ token: user.token, title: title, category: category, selectedDate: new Date(formatedDate), address: place, description: description, seats: seats })
     })
       .then((response) => response.json())
       .then((data) => {
@@ -65,7 +50,7 @@ export default function PostScreen({ navigation }) {
           setSeats(0);
           dispatch(addEventCreated(data.event));
           dispatch(addEvent(data.event));
-          navigation.navigate("TabNavigator", { screen: "Events" });
+          navigation.navigate("TabNavigator", { screen: "MyEvents" });
         }
       });
   };

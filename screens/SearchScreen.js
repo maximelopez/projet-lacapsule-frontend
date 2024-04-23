@@ -1,16 +1,9 @@
-import React, { useState } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import DatePicker from "react-native-modern-datepicker";
-import { useSelector } from "react-redux";
 import EventCard from "../components/EventCard";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function SearchScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);

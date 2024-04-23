@@ -1,17 +1,13 @@
 // Composants
-import DetailsScreen from "./screens/DetailsScreen";
-//import EditEventPostedScreen from "./screens/EditEventPostedScreen";
-import HomeScreen from "./screens/HomeScreen";
-import MyEventsScreen from "./screens/MyEventsScreen";
-//import MyEventsVersionMapScreen from "./screens/MyEventsVersionMapScreen";
-import PostScreen from "./screens/PostScreen";
-//import ProfileCreationScreen from "./screens/ProfileCreationScreen";
-import ProfileScreen from "./screens/ProfileScreen";
-import SearchScreen from "./screens/SearchScreen";
-import SignInScreen from "./screens/SignInScreen";
-import SignUpScreen from "./screens/SignUpScreen";
-// import EditEventPosted from "./screens/EditEventPosted";
 import WelcomeScreen from "./screens/WelcomeScreen";
+import SignUpScreen from "./screens/SignUpScreen";
+import SignInScreen from "./screens/SignInScreen";
+import HomeScreen from "./screens/HomeScreen";
+import PostScreen from "./screens/PostScreen";
+import SearchScreen from "./screens/SearchScreen";
+import MyEventsScreen from "./screens/MyEventsScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import DetailsScreen from "./screens/DetailsScreen";
 
 // Icons
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -99,10 +95,8 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
-          {/* <Stack.Screen name="EditEventPosted" component={EditEventPostedScreen} /> */}
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="SignIn" component={SignInScreen} />
-          {/* <Stack.Screen name="ProfileCreation" component={ProfileCreationScreen} /> */}
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
           <Stack.Screen name="Details" component={DetailsScreen} />
         </Stack.Navigator>
