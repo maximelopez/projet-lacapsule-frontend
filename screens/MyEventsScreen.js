@@ -1,0 +1,108 @@
+import { useEffect } from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import EventCard from "../components/EventCard";
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import { loadEventsCreated, loadEventsRegister } from "../reducers/user";
+
+export default function MyEventsScreen({ navigation }) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
+
+  const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
+
+  useEffect(() => {
+    // Inscriptions
+    fetch(BACKEND_URL + "/events/register/" + user.token)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          dispatch(loadEventsRegister(data.events));
+        }
+      });
+
+    // Propositions
+    fetch(BACKEND_URL + "/events/created/" + user.token)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          dispatch(loadEventsCreated(data.events));
+        }
+      });
+  }, []);
+
+  // inscriptions
+  const registerList = user.eventsRegister.map((event, i) => {
+    return (
+      <EventCard
+        key={i}
+        navigation={navigation}
+        id={event._id}
+        title={event.title}
+        address={event.address}
+        seats={event.seats}
+        participants={event.participants}
+        date={event.date}
+      />
+    );
+  });
+
+  // Propositions
+  const createdList = user.eventsCreated.map((event, i) => {
+    return (
+      <EventCard
+        key={i}
+        navigation={navigation}
+        id={event._id}
+        title={event.title}
+        address={event.address}
+        seats={event.seats}
+        participants={event.participants}
+        date={event.date}
+      />
+    );
+  });
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Mes sorties</Text>
+
+      <ScrollView style={styles.events}>
+        <View style={styles.propositions}>
+          <Text style={styles.subTitle}>Mes propositions :</Text>
+          {createdList}
+        </View>
+        <View style={styles.inscriptions}>
+          <Text style={styles.subTitle}>Mes inscriptions :</Text>
+          {registerList}
+        </View>
+      </ScrollView>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    justifyContent: "center",
+  },
+  title: {
+    fontSize: 34, //as per figma//
+    fontWeight: "500", //as per figma//
+    marginTop: 50, //espacement pour decaler titre//
+    alignSelf: "center",
+  },
+  subTitle: {
+    fontSize: 20,
+    color: "#263238",
+    marginLeft: 20,
+    marginTop: 25,
+  },
+  events: {
+    flex: 1,
+  },
+  propositions: {
+    marginBottom: 20,
+  },
+});
