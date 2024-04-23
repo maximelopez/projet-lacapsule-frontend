@@ -1,13 +1,6 @@
-import { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-
+import { useState } from "react";
 // Redux
 import { useDispatch } from "react-redux";
 import { login } from "../reducers/user";
@@ -31,14 +24,7 @@ export default function SignIn({ navigation }) {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          dispatch(
-            login({
-              token: data.token,
-              id: data.id,
-              firstname: data.firstname,
-              email: data.email,
-            })
-          );
+          dispatch(login({ token: data.token, id: data.id, firstname: data.firstname, email: data.email }));
           setEmail("");
           setPassword("");
           setError("");

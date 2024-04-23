@@ -1,13 +1,6 @@
-import { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-
+import { useState } from "react";
 // Redux
 import { useDispatch } from "react-redux";
 import { login } from "../reducers/user";
@@ -23,7 +16,7 @@ export default function SignUp({ navigation }) {
   const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
 
   const handleSubmit = () => {
-    // Enregistrement de l'utilisateur en base de données
+    // Création du compte utilisateur
     fetch(BACKEND_URL + "/users/signup", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -36,19 +29,12 @@ export default function SignUp({ navigation }) {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          dispatch(
-            login({
-              token: data.token,
-              id: data.id,
-              firstname: data.firstname,
-              email: data.email,
-            })
-          );
+          dispatch(login({ token: data.token, id: data.id, firstname: data.firstname, email: data.email }));
           setFirstname("");
           setEmail("");
           setPassword("");
           setError("");
-          navigation.navigate("ProfileCreation");
+          navigation.navigate("TabNavigator");
         } else {
           setError(data.error);
         }
@@ -122,8 +108,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 36, //as per figma//
-    fontWeight: "600", //as per figma//
+    fontSize: 36,
+    fontWeight: "600",
     marginTop: 40,
     marginBottom: 80,
   },

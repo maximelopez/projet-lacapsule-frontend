@@ -80,9 +80,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    fontSize: 34, //as per figma//
-    fontWeight: "500", //as per figma//
-    marginTop: 50, //espacement pour decaler titre//
+    fontSize: 34,
+    fontWeight: "500",
+    marginTop: 50,
     alignSelf: "center",
   },
   events: {
