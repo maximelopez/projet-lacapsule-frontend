@@ -1,14 +1,7 @@
-import React, { useState } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import DatePicker from "react-native-modern-datepicker";
+import { useState } from "react";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { addEvent } from "../reducers/events";

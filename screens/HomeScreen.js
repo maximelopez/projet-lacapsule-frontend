@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
 import EventCard from "../components/EventCard";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import { useEffect } from "react";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { loadEvents } from "../reducers/events";

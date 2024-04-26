@@ -2,6 +2,7 @@ import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 
 import { Dropdown } from "react-native-element-dropdown";
 import DatePicker from "react-native-modern-datepicker";
 import EventCard from "../components/EventCard";
+// Redux
 import { useState } from "react";
 import { useSelector } from "react-redux";
 

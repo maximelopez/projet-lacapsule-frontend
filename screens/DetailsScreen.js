@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { useEffect, useState } from "react";
+// Redux
 import { useDispatch, useSelector } from "react-redux";
 import { removeEvent } from "../reducers/events";
-import {
-  addEventRegister,
-  removeEventCreated,
-  removeEventRegister,
-} from "../reducers/user";
+import { addEventRegister, removeEventCreated, removeEventRegister } from "../reducers/user";
 
 export default function DetailsScreen({ route, navigation }) {
   const dispatch = useDispatch();
