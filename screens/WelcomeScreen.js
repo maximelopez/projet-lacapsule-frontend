@@ -15,7 +15,7 @@ export default function WelcomeScreen({ navigation }) {
         <Text style={styles.subtitleLine}>de sortir de chez toi.</Text>
       </Text>
       <Text style={styles.texte1}>
-        Pas encore membre ? L'inscription c'est par ici !
+        Pas encore membre ?
       </Text>
       <TouchableOpacity style={styles.registerbtn} activeOpacity={0.8} onPress={() => navigation.navigate("SignUp")}>
         <View style={styles.buttonContent}>
@@ -39,10 +39,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
+    color: "#0077B6",
     marginTop: 100,
     textAlign: "center",
   },
   titleLine: {
+    color: "#0077B6",
     fontSize: 36,
     fontWeight: "600",
     textAlign: "center",
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   registerbtn: {
-    backgroundColor: "#6C5CE7",
+    backgroundColor: "#0077B6",
     height: 50,
     width: 300,
     alignItems: "center",
@@ -80,10 +82,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#6C5CE7",
+    borderColor: "#0077B6",
   },
   loginText: {
-    color: "#6C5CE7",
+    color: "#0077B6",
     fontWeight: "600",
     fontSize: 20,
   },
@@ -97,13 +99,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   texte1: {
-    fontSize: 14,
+    fontSize: 16,
     paddingTop: 80,
     width: 300,
+    textAlign: "center",
   },
   texte2: {
-    fontSize: 14,
+    fontSize: 16,
     paddingTop: 50,
     width: 300,
+    textAlign: "center",
   },
 });

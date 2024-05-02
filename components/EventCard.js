@@ -36,7 +36,7 @@ export default function EventCard({ navigation, id }) {
     const eventHour = event?.date.slice(11, 13) + 'h' + event?.date.slice(14, 16);
 
     // Icon like
-    let heartStyle = "#263238";
+    let heartStyle = "#FFF";
     if (user.eventsLiked.includes(id)) {
         heartStyle = "#F43C3C";
     };
@@ -62,10 +62,11 @@ export default function EventCard({ navigation, id }) {
 
     return (
         <View style={styles.container}>
-            <View style={styles.content}>
+            <TouchableOpacity style={styles.content} activeOpacity={0.8} onPress={() => navigation.navigate('Details', { itemId: id })}>
+
                 <View style={styles.header}>
                     <View style={styles.headerLeft}>
-                        <FontAwesome name={categoryIcon} size={24} color='#263238' />
+                        <FontAwesome name={categoryIcon} size={24} color='#FFF' />
                         <Text style={styles.title}>{event?.title}</Text>
                     </View>
                     <View style={styles.headerRight}>
@@ -77,22 +78,30 @@ export default function EventCard({ navigation, id }) {
                         }
                     </View>
                 </View>
-                <View style={styles.location}>
-                    <FontAwesome name='location-dot' size={20} color='#263238' />
-                    <Text style={styles.locationText}>{event?.address} le {eventDate} à {eventHour}</Text>
+
+                <View style={styles.cardInfo}>
+                    <View style={styles.location}>
+                        <View style={styles.eventIcon}>
+                            <FontAwesome name='location-dot' size={20} color='#263238' />
+                        </View>
+                        <Text style={styles.eventText}>{event?.address}</Text>
+                    </View>
+                    <View style={styles.eventDate}>
+                        <View style={styles.eventIcon}>
+                            <FontAwesome name='calendar-days' size={20} color='#263238' />
+                        </View>
+                        <Text style={styles.eventText}>{eventDate} à {eventHour}</Text>
+                    </View>
+                    <View style={styles.participants}>
+                        <View style={styles.eventIcon}>
+                            <FontAwesome name='user-group' size={20} color='#263238' />
+                        </View>
+                        <Text style={styles.eventText}>{event?.participants.length} participants sur {event?.seats}</Text>
+                    </View>
                 </View>
-                <View style={styles.participants}>
-                    <FontAwesome name='user-group' size={20} color='#263238' />
-                    <Text style={styles.participantsText}>{event?.participants.length} participants sur {event?.seats}</Text>
-                </View>
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={() => navigation.navigate('Details', { itemId: id })}>
-                        <Text style={styles.buttonText}>Détails</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+
+            </TouchableOpacity>
         </View>
-       
     )
 }
 
@@ -102,16 +111,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     content: {
-        backgroundColor: "rgba(108, 92, 231, 0.1)",
         width: Dimensions.get('window').width * 0.9,
-        height: 200,
         marginVertical: 10,
-        borderRadius: 10,
-        padding: 20,
     },
     header: {
+        backgroundColor: "#0077B6",
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        padding: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        elevation: 5,
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.2,
+        shadowRadius: 3, 
     },
     headerLeft: {
         flexDirection: 'row',
@@ -123,20 +137,37 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         marginLeft: 10,
+        color: "#FFF",
+    },
+    cardInfo: {
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        backgroundColor: "#FFF",
+        padding: 20,
+        elevation: 5,
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+    },
+    eventIcon: {
+        width: 30,
+        alignItems: "center"
     },
     location: {
-        marginTop: 20,
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
-    locationText : {
+    eventText : {
         marginLeft: 10,
+        fontSize: 18,
+    },
+    eventDate: {
+        flexDirection: 'row',
+        marginTop: 20,
     },
     participants: {
         marginTop: 20,
         flexDirection: 'row',
-    },
-    participantsText: {
-        marginLeft: 10,
     },
     buttonContainer: {
         marginTop: 10,

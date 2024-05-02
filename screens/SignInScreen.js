@@ -96,8 +96,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 36, //as per figma//
-    fontWeight: "600", //as per figma//
+    color: "#0077B6",
+    fontSize: 36,
+    fontWeight: "600",
     marginTop: 40,
     marginBottom: 80,
   },
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   button: {
-    backgroundColor: "#6C5CE7",
+    backgroundColor: "#0077B6",
     borderRadius: 8,
     width: 300,
     height: 50,

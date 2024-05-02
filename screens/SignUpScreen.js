@@ -56,7 +56,7 @@ export default function SignUp({ navigation }) {
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
-            placeholder="Name"
+            placeholder="Prénom"
             value={firstname}
             onChangeText={(value) => setFirstname(value)}
           />
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
+    color: "#0077B6",
     fontSize: 36,
     fontWeight: "600",
     marginTop: 40,
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   button: {
-    backgroundColor: "#6C5CE7",
+    backgroundColor: "#0077B6",
     borderRadius: 8,
     width: 300,
     height: 50,

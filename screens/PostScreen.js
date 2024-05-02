@@ -181,8 +181,7 @@ export default function PostScreen({ navigation }) {
           <DatePicker
             style={styles.datepicker}
             options={{
-              mainColor: "#6C5CE7",
-              borderColor: "#6C5CE7",
+              mainColor: "#0077B6",
               selectedTextColor: "#fff",
             }}
             minimumDate={minimumDate}
@@ -208,9 +207,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   title: {
-    fontSize: 34, //as per figma//
-    fontWeight: "500", //as per figma//
-    marginTop: 50, //espacement pour decaler titre//
+    fontSize: 34,
+    fontWeight: "500",
+    marginTop: 50,
     alignSelf: "center",
   },
   inputList: {
@@ -233,7 +232,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   button: {
-    backgroundColor: "#6C5CE7",
+    backgroundColor: "#0077B6",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 8,
