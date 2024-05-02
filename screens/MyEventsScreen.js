@@ -34,32 +34,14 @@ export default function MyEventsScreen({ navigation }) {
   // inscriptions
   const registerList = user.eventsRegister.map((event, i) => {
     return (
-      <EventCard
-        key={i}
-        navigation={navigation}
-        id={event._id}
-        title={event.title}
-        address={event.address}
-        seats={event.seats}
-        participants={event.participants}
-        date={event.date}
-      />
+      <EventCard key={i} id={event._id} navigation={navigation} />
     );
   });
 
   // Propositions
   const createdList = user.eventsCreated.map((event, i) => {
     return (
-      <EventCard
-        key={i}
-        navigation={navigation}
-        id={event._id}
-        title={event.title}
-        address={event.address}
-        seats={event.seats}
-        participants={event.participants}
-        date={event.date}
-      />
+      <EventCard key={i} id={event._id} navigation={navigation} />
     );
   });
 

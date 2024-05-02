@@ -52,12 +52,10 @@ export default function PostScreen({ navigation }) {
   const categoryList = [
     { label: "Bar", value: "Bar" },
     { label: "Restaurant", value: "Restaurant" },
-    { label: "Cinéma", value: "Cinéma" },
-    { label: "Théâtre", value: "Théâtre" },
+    { label: "Musée", value: "Musée" },
     { label: "Sport", value: "Sport" },
     { label: "Voyage", value: "Voyage" },
-    { label: "Tricot", value: "Tricot" },
-    { label: "Pêche à la mouche", value: "Pêche à la mouche" },
+    { label: "Autre", value: "Autre" },
   ];
 
   const numberSeats = [

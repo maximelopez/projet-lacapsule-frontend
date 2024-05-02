@@ -1,9 +1,10 @@
 import EventCard from "../components/EventCard";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { useEffect } from "react";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { loadEvents } from "../reducers/events";
+import { loadEventsLiked } from "../reducers/user";
 
 export default function HomeScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -38,37 +39,31 @@ export default function HomeScreen({ navigation }) {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          const eventsOfTheDay = [];
-          for (let event of data.events) {
-            if (event.date.slice(0, 10) === localDateFormated) {
-              eventsOfTheDay.push(event);
-            }
-          }
-          dispatch(loadEvents(eventsOfTheDay));
+          dispatch(loadEvents(data.events));
+          // Récupérer les likes de l'utilisateur
+          fetch(BACKEND_URL + "/users/like/" + user.token)
+          .then(response => response.json())
+          .then(data => {
+            dispatch(loadEventsLiked(data.eventsLiked));
+          })
         }
       });
   }, []);
 
+  const eventsOfTheDay = events.map((event, i) => {
+    if (event.date.slice(0, 10) === localDateFormated) {
+      return <EventCard key={i} id={event._id} navigation={navigation} />
+    }
+  });
+
+  console.log(eventsOfTheDay)
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sorties du jour</Text>
-      <View style={styles.events}>
-        <FlatList
-          data={events}
-          renderItem={({ item }) => (
-            <EventCard
-              navigation={navigation}
-              id={item._id}
-              title={item.title}
-              address={item.address}
-              seats={item.seats}
-              participants={item.participants}
-              date={item.date}
-            />
-          )}
-          keyExtractor={(item) => item._id}
-        />
-      </View>
+      <ScrollView>
+        <View style={styles.events}>{eventsOfTheDay}</View>
+      </ScrollView>
     </View>
   );
 }

@@ -1,30 +1,89 @@
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from "react-native";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
+import FontAwesome from "react-native-vector-icons/FontAwesome6";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { likeEvent } from "../reducers/user";
 
-export default function EventCard({ navigation, id, title, address, date, participants, seats }) {
+export default function EventCard({ navigation, id }) {
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.user.value);
 
-    const eventDate = date.slice(8, 10) + '/' + date.slice(5, 7) + '/' + date.slice(0, 4);
-    const eventHour = date.slice(11, 13) + 'h' + date.slice(14, 16);
+    const [event, setEvent] = useState(null);
 
-    return(
+    const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
+
+    useEffect(() => {
+        fetch(BACKEND_URL + "/events/details/" + user.token + "/" + id)
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.result) {
+              setEvent(data.event);
+            }
+          });
+    }, [user.eventsRegister]);
+
+    const handleLike = () => {
+        fetch(BACKEND_URL + "/users/like/" + user.token + "/" + id, {
+            method: "PUT"
+        })
+            .then(response => response.json())
+            .then(() => {
+                dispatch(likeEvent(id));
+            });
+    };
+
+    const eventDate = event?.date.slice(8, 10) + '/' + event?.date.slice(5, 7) + '/' + event?.date.slice(0, 4);
+    const eventHour = event?.date.slice(11, 13) + 'h' + event?.date.slice(14, 16);
+
+    // Icon like
+    let heartStyle = "#263238";
+    if (user.eventsLiked.includes(id)) {
+        heartStyle = "#F43C3C";
+    };
+
+    // icons catégories
+    let categoryIcon = '';
+
+    if (event?.category.name === "Bar") {
+        categoryIcon = "wine-glass"
+    }
+    if (event?.category.name === "Restaurant") {
+        categoryIcon = "burger"
+    }
+    if (event?.category.name === "Sport") {
+        categoryIcon = "table-tennis-paddle-ball";
+    }
+    if (event?.category.name === "Voyage") {
+        categoryIcon = "suitcase-rolling";
+    }
+    if (event?.category.name === "Cinéma") {
+        categoryIcon = "tv";
+    }
+
+    return (
         <View style={styles.container}>
             <View style={styles.content}>
                 <View style={styles.header}>
                     <View style={styles.headerLeft}>
-                        <FontAwesome name='university' size={20} color='#263238' />
-                        <Text style={styles.title}>{title}</Text>
+                        <FontAwesome name={categoryIcon} size={24} color='#263238' />
+                        <Text style={styles.title}>{event?.title}</Text>
                     </View>
                     <View style={styles.headerRight}>
-                        <FontAwesome name='heart' size={20} color='#263238' />
+                        {
+                            user.id === event?.creator._id || event?.participants.includes(user.id) ? null :
+                            <TouchableOpacity onPress={() => handleLike()} activeOpacity={0.8}>
+                                <FontAwesome name='heart' size={20} color={heartStyle} />
+                            </TouchableOpacity>
+                        }
                     </View>
                 </View>
                 <View style={styles.location}>
-                    <FontAwesome name='map-marker' size={20} color='#263238' />
-                    <Text style={styles.locationText}>{address} le {eventDate} à {eventHour}</Text>
+                    <FontAwesome name='location-dot' size={20} color='#263238' />
+                    <Text style={styles.locationText}>{event?.address} le {eventDate} à {eventHour}</Text>
                 </View>
                 <View style={styles.participants}>
-                    <FontAwesome name='user' size={20} color='#263238' />
-                    <Text style={styles.participantsText}>{participants.length} participants sur {seats}</Text>
+                    <FontAwesome name='user-group' size={20} color='#263238' />
+                    <Text style={styles.participantsText}>{event?.participants.length} participants sur {event?.seats}</Text>
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={() => navigation.navigate('Details', { itemId: id })}>
