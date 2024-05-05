@@ -13,7 +13,7 @@ export default function PostScreen({ navigation }) {
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [place, setPlace] = useState("");
+  const [city, setCity] = useState("");
   const [description, setDescription] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [seats, setSeats] = useState(0);
@@ -22,7 +22,7 @@ export default function PostScreen({ navigation }) {
 
   const handleSubmit = () => {
     // alerte si tous les champs ne sont  pas remplis //
-    if ( !title || !category || !selectedDate || !place || !description || !seats ) {
+    if ( !title || !category || !selectedDate || !city || !description || !seats ) {
       alert("Veuillez remplir tous les champs");
       return;
     }
@@ -30,14 +30,21 @@ export default function PostScreen({ navigation }) {
     fetch(`${BACKEND_URL}/events`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: user.token, title: title, category: category, selectedDate: new Date(formatedDate), city: place, description: description, seats: seats })
+      body: JSON.stringify({ 
+        token: user.token, 
+        title: title, 
+        category: category, 
+        selectedDate: new Date(formatedDate), 
+        city: city, 
+        description: description, 
+        seats: seats })
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
           setTitle("");
           setCategory("");
-          setPlace("");
+          setCity("");
           setDescription("");
           setSelectedDate("");
           setSeats(0);
@@ -142,8 +149,8 @@ export default function PostScreen({ navigation }) {
             <Text style={styles.text}>Ville :</Text>
             <TextInput
               placeholder="Ville"
-              onChangeText={(value) => setPlace(value)}
-              value={place}
+              onChangeText={(value) => setCity(value)}
+              value={city}
               style={styles.input}
               maxLength={50}
               selectionColor="#6C5CE7"
