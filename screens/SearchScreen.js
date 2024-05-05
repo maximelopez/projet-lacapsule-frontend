@@ -26,7 +26,7 @@ export default function SearchScreen({ navigation }) {
 
           // Filtrer avec les critères de recherche
           for (let event of data.events) {
-            if (event.address.toLowerCase() === city.toLowerCase()) {
+            if (event.city.toLowerCase() === city.toLowerCase()) {
               if (event.category.name === category) {
                 if (event.date.slice(0, 10) === formatedDate) {
                   searchEvents.push(event);
@@ -57,7 +57,7 @@ export default function SearchScreen({ navigation }) {
           navigation={navigation}
           id={event._id}
           title={event.title}
-          address={event.address}
+          city={event.city}
           seats={event.seats}
           participants={event.participants}
           date={event.date}

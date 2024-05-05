@@ -126,7 +126,7 @@ export default function DetailsScreen({ route, navigation }) {
             <FontAwesome name="map-marker" size={20} color="#263238" />
             <Text style={styles.nameaddress}>
               {"    "}
-              {event?.address}
+              {event?.city}
             </Text>
           </View>
         </View>

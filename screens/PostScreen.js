@@ -30,7 +30,7 @@ export default function PostScreen({ navigation }) {
     fetch(`${BACKEND_URL}/events`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: user.token, title: title, category: category, selectedDate: new Date(formatedDate), address: place, description: description, seats: seats })
+      body: JSON.stringify({ token: user.token, title: title, category: category, selectedDate: new Date(formatedDate), city: place, description: description, seats: seats })
     })
       .then((response) => response.json())
       .then((data) => {

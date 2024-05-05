@@ -84,7 +84,7 @@ export default function EventCard({ navigation, id }) {
                         <View style={styles.eventIcon}>
                             <FontAwesome name='location-dot' size={20} color='#263238' />
                         </View>
-                        <Text style={styles.eventText}>{event?.address}</Text>
+                        <Text style={styles.eventText}>{event?.city}</Text>
                     </View>
                     <View style={styles.eventDate}>
                         <View style={styles.eventIcon}>

@@ -66,14 +66,14 @@ const TabNavigator = () => {
         options={{ tabBarLabel: "Accueil" }}
       />
       <Tab.Screen
-        name="Post"
-        component={PostScreen}
-        options={{ tabBarLabel: "Créer" }}
-      />
-      <Tab.Screen
         name="Search"
         component={SearchScreen}
         options={{ tabBarLabel: "Rechercher" }}
+      />
+      <Tab.Screen
+        name="Post"
+        component={PostScreen}
+        options={{ tabBarLabel: "Créer" }}
       />
       <Tab.Screen
         name="MyEvents"
