@@ -32,9 +32,9 @@ export const userSlice = createSlice({
     },
     // Liker un event
     likeEvent: (state, action) =>{
-      if (state.value.eventsLiked.includes(action.payload)) { // .id ?
+      if (state.value.eventsLiked.includes(action.payload)) {
         state.value.eventsLiked = state.value.eventsLiked.filter(
-          (event) => event !== action.payload // .id ?
+          (event) => event !== action.payload
         );
       } else {
         state.value.eventsLiked.push(action.payload);

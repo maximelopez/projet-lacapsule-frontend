@@ -8,6 +8,7 @@ import SearchScreen from "./screens/SearchScreen";
 import MyEventsScreen from "./screens/MyEventsScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import DetailsScreen from "./screens/DetailsScreen";
+import FavoritesScreen from "./screens/FavoritesScreen";
 
 // Icons
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -99,6 +100,7 @@ export default function App() {
           <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
           <Stack.Screen name="Details" component={DetailsScreen} />
+          <Stack.Screen name="Favorites" component={FavoritesScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
