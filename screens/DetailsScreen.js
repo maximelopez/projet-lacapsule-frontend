@@ -69,12 +69,6 @@ export default function DetailsScreen({ route, navigation }) {
       });
   };
 
-  
-  //Modifier si créateur
-  const handleUpdateEvent = () => {
-    navigation.navigate("EditEventPosted", { itemId: itemId }); // ligne modifiée
-  };
-
   let userIsCreator = false;
   if (event) {
     if (event.creator?._id === user.id) {
@@ -102,112 +96,66 @@ export default function DetailsScreen({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.back}
-        activeOpacity={0.8}
-        onPress={() => navigation.goBack()}
-      >
+      <TouchableOpacity style={styles.back} activeOpacity={0.8} onPress={() => navigation.goBack()}>
         <FontAwesome name="arrow-left" size={20} color="#263238" />
       </TouchableOpacity>
 
       <View style={styles.content}>
-        <Text style={styles.details}>Détails de la sortie</Text>
-        <View style={styles.category}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <FontAwesome name="university" size={30} color="#263238" />
-            <Text style={styles.title}>
-              {"  "}
-              {event?.title}
-            </Text>
+        <Text style={styles.title}>Détails de la sortie</Text>
+        <View  style={styles.event}>
+          <View style={styles.eventHeader}>
+            <FontAwesome style={styles.eventIcon} name="university" size={28} color="#FFF" />
+            <Text style={styles.headerText}>{event?.title}</Text>
           </View>
-        </View>
-        <View style={styles.address}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <FontAwesome name="map-marker" size={20} color="#263238" />
-            <Text style={styles.nameaddress}>
-              {"    "}
-              {event?.city}
-            </Text>
-          </View>
-        </View>
-        <View style={styles.datehour}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <FontAwesome
-              style={styles.calendar}
-              name="calendar"
-              size={25}
-              color={"#263238"}
-            />
-            <Text style={styles.hourtxt}>
-              {" "}
-              {"  "}
-              {formatDateTime(event?.date)}
-            </Text>
-          </View>
-        </View>
-        <View style={styles.nbseats}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <FontAwesome name="user" size={20} color="#263238" />
 
-            <Text style={styles.seatstxt}>
-              {" "}
-              {"   "}
-              {event?.participants.length} personnes inscrites
-            </Text>
+          <View style={styles.eventInfo}>
+            <View style={styles.iconContainer}>
+              <FontAwesome name="map-marker" size={24} color="#263238" />
+            </View>
+            <Text style={styles.text}>{event?.city}</Text>
           </View>
-        </View>
-        <View style={styles.descriptioncontent}>
-          <Text style={styles.desc}>{event?.description}</Text>
+
+          <View style={styles.eventInfo}>
+            <View style={styles.iconContainer}>
+              <FontAwesome name="calendar" size={24} color={"#263238"} />
+            </View>
+            <Text style={styles.text}>{formatDateTime(event?.date)}</Text>
+          </View>
+
+          <View style={styles.eventInfo}>
+            <View style={styles.iconContainer}>
+              <FontAwesome name="user" size={24} color="#263238" />
+            </View>
+            <Text style={styles.text}>Nombre de participant : {event?.participants.length}</Text> 
+          </View>
+
+          <View style={styles.eventInfo}>
+            <Text style={styles.description}> Description : {event?.description}</Text>
+          </View>
+
         </View>
       </View>
-      {/* //Le user est organisateur */}
+
       {userIsCreator && (
-        <>
-          <TouchableOpacity
-            style={styles.button}
-            activeOpacity={0.8}
-            onPress={() => handleDeleteEvent()}
-          >
-            <View style={styles.buttonContent}>
-              <Text style={styles.buttonText}>Supprimer</Text>
-              <FontAwesome style={styles.arrow} name="arrow-right" />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            activeOpacity={0.8}
-            onPress={() => handleUpdateEvent()}
-          >
-            <View style={styles.buttonContent}>
-              <Text style={styles.buttonText}>Modifier</Text>
-              <FontAwesome style={styles.arrow} name="arrow-right" />
-            </View>
-          </TouchableOpacity>
-        </>
-      )}
-      {/* Le user n'est ni participant ni organisateur */}
-      {!userIsCreator && !userIsParticipant && (
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.8}
-          onPress={() => handleRegisterToAnEvent()}
-        >
+        <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={() => handleDeleteEvent()}>
           <View style={styles.buttonContent}>
-            <Text style={styles.buttonText}>M'inscrire</Text>
-            <FontAwesome style={styles.arrow} name="arrow-right" />
+            <Text style={styles.buttonText}>Supprimer</Text>
           </View>
         </TouchableOpacity>
       )}
-      {/* Le user est participant */}
+
+      {!userIsCreator && !userIsParticipant && (
+        <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={() => handleRegisterToAnEvent()}>
+          <View style={styles.buttonContent}>
+            <Text style={styles.buttonText}>M'inscrire</Text>
+          </View>
+        </TouchableOpacity>
+      )}
+
       {userIsParticipant && (
-        <TouchableOpacity
-          style={styles.button}
-          activeOpacity={0.8}
-          onPress={() => handleUnregisterToAnEvent()}
-        >
+        <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={() => handleUnregisterToAnEvent()}>
           <View style={styles.buttonContent}>
             <Text style={styles.buttonText}>Me désinscrire</Text>
-            <FontAwesome style={styles.arrow} name="arrow-right" />
           </View>
         </TouchableOpacity>
       )}
@@ -232,77 +180,59 @@ const styles = StyleSheet.create({
     borderColor: "#E1E3E6",
   },
   content: {
-    alignItems: "flex-start",
-    marginTop: 25, //espacement//
-    marginLeft: 10, //espacement//
-    backgroundColor: "#D2B8F2",
-    borderRadius: 10, //as per figma
-    width: "95%", //as per figma
-    height: "65%",
-  },
-  details: {
-    fontSize: 34, //as per figma//
-    fontWeight: "500", //as per figma//
-    letterSpacing: -1,
-    paddingLeft: 25, //espacement
-    paddingTop: 15, //espacement
+    alignItems: 'center',
   },
   title: {
-    fontSize: 28,
+    fontSize: 34,
+    fontWeight: "500",
+    marginTop: 20,
+    alignSelf: "center",
+    marginBottom: 20,
   },
-  category: {
-    paddingTop: 25,
-    paddingLeft: 15,
+  eventHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#0077B6',
+    borderRadius: 10,
+    width: 300,
+    height: 75,
+    color: '#FFFFFF',
   },
-  address: {
-    marginTop: 35,
-    paddingLeft: 25,
+  headerText: {
+    color: '#FFF',
+    fontSize: 20,
   },
-  nameaddress: {
-    fontSize: 22, //as per figma
+  eventIcon: {
+    marginLeft: 24,
+    marginRight: 10,
   },
-  datehour: {
-    marginTop: 15,
-    paddingLeft: 20,
+  eventInfo: {
+    flexDirection: 'row',
+    marginTop: 20,
   },
-  hourtxt: {
-    fontSize: 22, //as per figma
+  text: {
+    fontSize: 20,
+    marginLeft: 10
   },
-  nbseats: {
-    marginTop: 15,
-    paddingLeft: 25,
+  iconContainer: {
+    width: 30,
+    alignItems: 'center'
   },
-  seatstxt: {
-    fontSize: 22, //as per figma
-  },
-
-  descriptioncontent: {
-    paddingTop: 150, //espacement
-    paddingLeft: 100, //espacement
-  },
-  desc: {
-    fontSize: 22,
+  description: {
+    fontSize: 20,
   },
   button: {
-    backgroundColor: "#6C5CE7",
+    backgroundColor: "#0077B6",
     borderRadius: 8,
     width: 300,
     height: 50,
-    alignItems: "center", //centre texte//
-    justifyContent: "center", //centre texte//
-    marginTop: 10, //espacement
-    marginLeft: 50, //espacement
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: 'center',
+    marginTop: 50,
   },
   buttonText: {
     color: "#FFF",
     fontSize: 20,
-  },
-  buttonContent: {
-    flexDirection: "row", //dans le but espacer txt et fleche//
-    alignItems: "center", //centre fleche//
-  },
-  arrow: {
-    marginLeft: 30, // as per figma//
-    color: "white", //as per figma//
   },
 });
