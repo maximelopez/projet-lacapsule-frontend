@@ -1,4 +1,5 @@
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { Dropdown } from "react-native-element-dropdown";
 import DatePicker from "react-native-modern-datepicker";
 import EventCard from "../components/EventCard";
@@ -13,6 +14,7 @@ export default function SearchScreen({ navigation }) {
   const [category, setCategory] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [result, setResult] = useState([]);
+  const [displayResult, setDisplayResult] = useState(false);
 
   const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
 
@@ -37,6 +39,7 @@ export default function SearchScreen({ navigation }) {
 
           if (searchEvents.length) {
             setResult(searchEvents);
+            setDisplayResult(true);
           } else {
             setResult([]);
             alert("aucune sortie n'est trouvée");
@@ -109,56 +112,71 @@ export default function SearchScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Rechercher une sortie</Text>
-      <ScrollView>
-        <View style={styles.inputList}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.text}>Ville :</Text>
-            <TextInput
-              placeholder="Ville"
-              onChangeText={(value) => setCity(value)}
-              value={city}
-              style={styles.input}
-              maxLength={30}
-              selectionColor="#6C5CE7"
-            />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <Text style={styles.text}>Catégorie :</Text>
-            <Dropdown
-              style={styles.dropdown}
-              placeholder="Sélectionner"
-              data={categoryList}
-              maxHeight={300}
-              labelField="label"
-              valueField="value"
-              onChange={(item) => setCategory(item.value)}
-              value={category}
-            />
-          </View>
-
-          <DatePicker
-            style={styles.datepicker}
-            options={{
-              mainColor: "#0077B6",
-              selectedTextColor: "#fff",
-            }}
-            minimumDate={minimumDate}
-            mode="calendar"
-            onSelectedChange={(date) => setSelectedDate(date)}
-          />
-
-          <TouchableOpacity
-            onPress={() => handleSubmit()}
-            style={styles.button}
-            activeOpacity={0.8}
-          >
-            <Text style={styles.buttonText}>Rechercher</Text>
+      {
+        displayResult ?
+        <View>
+          <TouchableOpacity style={styles.back} activeOpacity={0.8} onPress={() => setDisplayResult(false)}>
+            <FontAwesome name="arrow-left" size={20} color="#263238" />
           </TouchableOpacity>
-
-          {eventsCard}
+          <Text style={styles.title}>Résultats</Text>
         </View>
+        :
+        <Text style={styles.title}>Rechercher une sortie</Text>
+      }
+
+      <ScrollView>   
+        {
+            // Si résultats trouvés les afficher
+            displayResult ?
+            <View style={styles.result}>
+              {eventsCard}
+            </View>
+            :
+            <View style={styles.inputList}>
+
+              <View style={styles.inputContainer}>
+                <Text style={styles.text}>Ville :</Text>
+                <TextInput
+                  placeholder="Ville"
+                  onChangeText={(value) => setCity(value)}
+                  value={city}
+                  style={styles.input}
+                  maxLength={30}
+                  selectionColor="#0077B6"
+                />
+              </View>
+
+              <View style={styles.inputContainer}>
+                <Text style={styles.text}>Catégorie :</Text>
+                <Dropdown
+                  style={styles.dropdown}
+                  placeholder="Sélectionner"
+                  data={categoryList}
+                  maxHeight={300}
+                  labelField="label"
+                  valueField="value"
+                  onChange={(item) => setCategory(item.value)}
+                  value={category}
+                />
+              </View>
+
+              <DatePicker
+                style={styles.datepicker}
+                options={{
+                  mainColor: "#0077B6",
+                  selectedTextColor: "#fff",
+                }}
+                minimumDate={minimumDate}
+                mode="calendar"
+                onSelectedChange={(date) => setSelectedDate(date)}
+              />
+
+              <TouchableOpacity onPress={() => handleSubmit()} style={styles.button} activeOpacity={0.8}>
+                <Text style={styles.buttonText}>Rechercher</Text>
+              </TouchableOpacity>   
+            </View>
+          }
+
       </ScrollView>
     </View>
   );
@@ -175,6 +193,17 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "#263238",
     marginLeft: 20,
+  },
+  back: {
+    marginTop: 50,
+    marginLeft: 10,
+    width: 80,
+    height: 56,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#E1E3E6",
   },
   inputList: {
     alignItems: "center",

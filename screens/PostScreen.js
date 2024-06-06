@@ -127,7 +127,7 @@ export default function PostScreen({ navigation }) {
               value={title}
               style={styles.input}
               maxLength={30}
-              selectionColor="#6C5CE7"
+              selectionColor="#0077B6"
             />
           </View>
 
@@ -141,7 +141,7 @@ export default function PostScreen({ navigation }) {
               value={description}
               style={styles.input}
               maxLength={100}
-              selectionColor="#6C5CE7"
+              selectionColor="#0077B6"
             />
           </View>
 
@@ -153,7 +153,7 @@ export default function PostScreen({ navigation }) {
               value={city}
               style={styles.input}
               maxLength={50}
-              selectionColor="#6C5CE7"
+              selectionColor="#0077B6"
             />
           </View>
 

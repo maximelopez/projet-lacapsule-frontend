@@ -51,8 +51,6 @@ export default function HomeScreen({ navigation }) {
     }
   });
 
-  console.log(eventsOfTheDay)
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sorties du jour</Text>
