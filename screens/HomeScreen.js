@@ -27,12 +27,7 @@ export default function HomeScreen({ navigation }) {
   };
 
   const localDate = formatDateTime(new Date());
-  const localDateFormated =
-    localDate.slice(6, 10) +
-    "-" +
-    localDate.slice(3, 5) +
-    "-" +
-    localDate.slice(0, 2);
+  const localDateFormated = localDate.slice(6, 10) + "-" + localDate.slice(3, 5) + "-" + localDate.slice(0, 2);
 
   useEffect(() => {
     fetch(BACKEND_URL + "/events/all/" + user.token)

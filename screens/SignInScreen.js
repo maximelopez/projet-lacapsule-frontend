@@ -37,17 +37,15 @@ export default function SignIn({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.back}
-        activeOpacity={0.8}
-        onPress={() => navigation.navigate("Welcome")}
-      >
+      <TouchableOpacity style={styles.back} activeOpacity={0.8} onPress={() => navigation.navigate("Welcome")}>
         <FontAwesome name="arrow-left" size={20} color="#263238" />
       </TouchableOpacity>
+
       <View style={styles.content}>
         <Text style={styles.title}>Connexion</Text>
         {error && <Text style={styles.error}>{error}</Text>}
         <View style={styles.inputContainer}>
+
           <TextInput
             style={styles.input}
             placeholder="Email"
@@ -56,6 +54,7 @@ export default function SignIn({ navigation }) {
             value={email}
             onChangeText={(value) => setEmail(value)}
           />
+          
           <TextInput
             style={styles.input}
             placeholder="Password"
@@ -63,11 +62,8 @@ export default function SignIn({ navigation }) {
             value={password}
             onChangeText={(value) => setPassword(value)}
           />
-          <TouchableOpacity
-            style={styles.button}
-            activeOpacity={0.8}
-            onPress={() => handleSubmit()}
-          >
+
+          <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={() => handleSubmit()}>
             <Text style={styles.buttonText}>Valider</Text>
           </TouchableOpacity>
         </View>

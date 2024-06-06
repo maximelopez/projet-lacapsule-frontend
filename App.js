@@ -61,31 +61,11 @@ const TabNavigator = () => {
         headerShown: false,
       })}
     >
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ tabBarLabel: "Accueil" }}
-      />
-      <Tab.Screen
-        name="Search"
-        component={SearchScreen}
-        options={{ tabBarLabel: "Rechercher" }}
-      />
-      <Tab.Screen
-        name="Post"
-        component={PostScreen}
-        options={{ tabBarLabel: "Créer" }}
-      />
-      <Tab.Screen
-        name="MyEvents"
-        component={MyEventsScreen}
-        options={{ tabBarLabel: "Mes sorties" }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{ tabBarLabel: "Mon profil" }}
-      />
+      <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarLabel: "Accueil" }}/>
+      <Tab.Screen name="Search" component={SearchScreen} options={{ tabBarLabel: "Rechercher" }}/>
+      <Tab.Screen name="Post" component={PostScreen} options={{ tabBarLabel: "Créer" }}/>
+      <Tab.Screen name="MyEvents" component={MyEventsScreen} options={{ tabBarLabel: "Mes sorties" }}/>
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{ tabBarLabel: "Mon profil" }}/>
     </Tab.Navigator>
   );
 };

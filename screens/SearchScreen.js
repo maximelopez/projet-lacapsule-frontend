@@ -141,8 +141,7 @@ export default function SearchScreen({ navigation }) {
           <DatePicker
             style={styles.datepicker}
             options={{
-              mainColor: "#6C5CE7",
-              borderColor: "#6C5CE7",
+              mainColor: "#0077B6",
               selectedTextColor: "#fff",
             }}
             minimumDate={minimumDate}
@@ -197,7 +196,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   button: {
-    backgroundColor: "#6C5CE7",
+    backgroundColor: "#0077B6",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 8,
