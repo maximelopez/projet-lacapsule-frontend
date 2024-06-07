@@ -5,14 +5,38 @@ import { useSelector } from "react-redux";
 export default function ProfileScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
 
+  const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
+
   // Charger l'image de le bdd
   let imageUrl = '../assets/images/profile.png';
+
+  // Upload de l'image
+  const formData = new FormData();
+
+  formData.append('photoFromFront', {
+    uri : imageUrl, // url à récupérer
+    name: 'photo.jpg',
+    type: 'image/jpeg',
+  });
+
+  fetch(BACKEND_URL + "/users/upload/" + user.token, {
+    method: 'POST',
+    body: formData,
+  }).then((response) => response.json())
+    .then((data) => {
+      console.log(data)
+  });
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Mon Profil</Text>
       <Image style={styles.image} source={require(`${imageUrl}`)} />
-      <View>
+
+      <TouchableOpacity style={styles.button} activeOpacity={0.8}>
+        <Text style={styles.buttonText}>Modifier</Text>
+      </TouchableOpacity>
+
+      <View style={styles.userInfo}>
         <Text style={styles.text}>Nom : {user.firstname}</Text>
         <Text style={styles.text}>Adresse email : {user.email}</Text>
       </View>
@@ -58,4 +82,8 @@ const styles = StyleSheet.create({
     color: "#FFF",
     fontSize: 20,
   },
+  userInfo: {
+    marginTop: 40,
+    marginBottom: 40,
+  }
 });
