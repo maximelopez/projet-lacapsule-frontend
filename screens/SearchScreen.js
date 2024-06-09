@@ -28,7 +28,7 @@ export default function SearchScreen({ navigation }) {
 
           // Filtrer avec les critères de recherche
           for (let event of data.events) {
-            if (event.city.toLowerCase() === city.toLowerCase() || city.length === 0) {
+            if (event.city.toLowerCase() === city.trim().toLowerCase() || city.length === 0) {
               if (event.category.name === category || category.length === 0) {
                 if (event.date.slice(0, 10) === formatedDate || selectedDate.length === 0) {
                   searchEvents.push(event);

@@ -71,7 +71,7 @@ export default function EventCard({ navigation, id }) {
                     </View>
                     <View style={styles.headerRight}>
                         {
-                            user.id === event?.creator._id || event?.participants.includes(user.id) ? null :
+                            user.id === event?.creator._id ? null :
                             <TouchableOpacity onPress={() => handleLike()} activeOpacity={0.8}>
                                 <FontAwesome name='heart' size={20} color={heartStyle} />
                             </TouchableOpacity>

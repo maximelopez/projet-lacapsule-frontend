@@ -1,11 +1,10 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import EventCard from "../components/EventCard";
 import { useSelector } from "react-redux";
 
 export default function FavoritesScreen({ navigation }) {
     const user = useSelector((state) => state.user.value);
 
-    // A tester
     const likeList = user.eventsLiked.map((event, i) => {
         return (
             <EventCard key={i} id={event} navigation={navigation} />
@@ -14,8 +13,10 @@ export default function FavoritesScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text>Favorites</Text>
-            {likeList}
+            <Text style={styles.title }>Mes favoris</Text>
+            <ScrollView>
+                {likeList}
+            </ScrollView>
         </View>
     )
 }
@@ -24,8 +25,14 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: "#fff",
-      justifyContent: 'center',
+
       alignItems: 'center'
     },
+    title: {
+        fontSize: 34,
+        fontWeight: "500",
+        marginTop: 50,
+        alignSelf: "center",
+      },
   });
   
