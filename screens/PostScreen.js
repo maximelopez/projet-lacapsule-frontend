@@ -35,7 +35,7 @@ export default function PostScreen({ navigation }) {
         title: title, 
         category: category, 
         selectedDate: new Date(formatedDate), 
-        city: city, 
+        city: city.trim(),
         description: description, 
         seats: seats })
     })

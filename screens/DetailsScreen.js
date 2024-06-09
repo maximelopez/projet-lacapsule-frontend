@@ -81,18 +81,8 @@ export default function DetailsScreen({ route, navigation }) {
     userIsParticipant = event.participants.includes(user.id);
   }
 
-  // Formatage de la date et de l'heure
-  const formatDateTime = (dateTimeString) => {
-    const options = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    };
-    const dateTime = new Date(dateTimeString);
-    return dateTime.toLocaleDateString("fr-FR", options);
-  };
+  const eventDate = event?.date.slice(8, 10) + '/' + event?.date.slice(5, 7) + '/' + event?.date.slice(0, 4);
+  const eventHour = event?.date.slice(11, 13) + 'h' + event?.date.slice(14, 16);
 
   return (
     <View style={styles.container}>
@@ -119,7 +109,7 @@ export default function DetailsScreen({ route, navigation }) {
             <View style={styles.iconContainer}>
               <FontAwesome name="calendar" size={24} color={"#263238"} />
             </View>
-            <Text style={styles.text}>{formatDateTime(event?.date)}</Text>
+            <Text style={styles.text}>{eventDate} à {eventHour}</Text>
           </View>
 
           <View style={styles.eventInfo}>
