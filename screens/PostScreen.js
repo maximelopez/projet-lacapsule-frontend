@@ -118,9 +118,6 @@ export default function PostScreen({ navigation }) {
       <ScrollView>
         <View style={styles.inputList}>
           <View style={styles.inputContainer}>
-            <Text style={styles.text}>
-              Titre : ({title.length}/30 caractères)
-            </Text>
             <TextInput
               placeholder="Titre"
               onChangeText={(value) => setTitle(value)}
@@ -132,9 +129,6 @@ export default function PostScreen({ navigation }) {
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.text}>
-              Description : ({description.length}/100 caractères)
-            </Text>
             <TextInput
               placeholder="Description"
               onChangeText={(value) => setDescription(value)}
@@ -146,7 +140,6 @@ export default function PostScreen({ navigation }) {
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.text}>Ville :</Text>
             <TextInput
               placeholder="Ville"
               onChangeText={(value) => setCity(value)}

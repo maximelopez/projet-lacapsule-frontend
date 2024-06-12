@@ -135,7 +135,6 @@ export default function SearchScreen({ navigation }) {
             <View style={styles.inputList}>
 
               <View style={styles.inputContainer}>
-                <Text style={styles.text}>Ville :</Text>
                 <TextInput
                   placeholder="Ville"
                   onChangeText={(value) => setCity(value)}

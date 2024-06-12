@@ -13,6 +13,10 @@ import FavoritesScreen from "./screens/FavoritesScreen";
 // Icons
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
+// Ne pas afficher les warnings
+import { LogBox } from 'react-native'; 
+LogBox.ignoreAllLogs();
+
 // Navigation
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
